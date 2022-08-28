@@ -1,18 +1,17 @@
 import React from 'react'
 import { Container, Col, Overlay, Row, Tooltip} from 'react-bootstrap';
 
-import axiosInstance from '../utils/axiosInstance';
-import parseProjectData from '../utils/parseProjectData';
 import Table from '../components/Table';
 import Form from '../components/Form';
 import Summary from '../components/Summary';
 import { parseTotalContractSum, parseHighestContractAmount, parseLowestContractAmount } from "../utils/parseProjectData"
-
+import { ProjectsContext } from '../_contexts/ProjectsContext';
 
 function Projects() {
+    const { projects, rawProjectsData } = React.useContext(ProjectsContext)
     const target = React.useRef(null)
     const [show, setShow] = React.useState(false)
-    const [projects, setProjects] = React.useState([])
+    // const [projects, setProjects] = React.useState([])
     const [queryObject, setQuery] = React.useState({})
     
     const [totalProjects, setTotalProjects] = React.useState(0)
@@ -21,18 +20,30 @@ function Projects() {
     const [lowestContractAmount, setLowestContractAmount] = React.useState(0)
     
     React.useEffect(()=> {
-        axiosInstance.get("/projects").then(({data}) => {
-            setProjects(parseProjectData(data.data));
-            setTotalProjects(data.data.length)
-            setTotalContractSum(parseTotalContractSum(data.data))
-            setHighestContractAmount(parseHighestContractAmount(data.data))
-            setLowestContractAmount(parseLowestContractAmount(data.data))
-        }).catch((err) => err.response)
-    }, [])
+        setTotalProjects(projects.length)
+        setTotalContractSum(parseTotalContractSum(rawProjectsData))
+        setHighestContractAmount(parseHighestContractAmount(rawProjectsData))
+        setLowestContractAmount(parseLowestContractAmount(rawProjectsData))
+    }, [projects, rawProjectsData])
+
+    // React.useEffect(()=> {
+    //     axiosInstance.get("/projects").then(({data}) => {
+    //         setProjects(parseProjectData(data.data));
+    //         setTotalProjects(data.data.length)
+    //         setTotalContractSum(parseTotalContractSum(data.data))
+    //         setHighestContractAmount(parseHighestContractAmount(data.data))
+    //         setLowestContractAmount(parseLowestContractAmount(data.data))
+    //     }).catch((err) => err.response)
+    //     setProjects(parseProjectData(projectsData.data));
+    //         setTotalProjects(projectsData.data.length)
+    //         setTotalContractSum(parseTotalContractSum(projectsData.data))
+    //         setHighestContractAmount(parseHighestContractAmount(projectsData.data))
+    //         setLowestContractAmount(parseLowestContractAmount(projectsData.data))
+    // }, [])
 
   return (
         <Container fluid="md">
-            <Row className="mt-5">
+            <Row className="pt-5">
                 <Col>
                     <Form setQuery={setQuery}/>
                 </Col>

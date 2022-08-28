@@ -1,25 +1,40 @@
 import React from 'react'
 import { Col, Container, Row } from "react-bootstrap"
 
-import axiosInstance from "../utils/axiosInstance"
 import VisualizationForm from '../components/VisualizationForm'
 import { BarChartWidget, LineChartWidget, PieChartWidget, AreaChartWidget } from '../components/Widgets'
-import parseProjectData, { extractLGAData, extractMDAData, extractSectorData, extractYearData } from '../utils/parseProjectData'
+import { extractLGAData, extractMDAData, extractYearData } from '../utils/parseProjectData'
+import { ProjectsContext } from '../_contexts/ProjectsContext';
+// import projectsData from '../data/projects'
+
 
 function Visualization() {
-    const [projects, setProjects] = React.useState([])
+    // const [projects, setProjects] = React.useState([])
+    const { projects } = React.useContext(ProjectsContext)
     const [options, setOptions] = React.useState()
     const [totalProjects, setTotalProjects] = React.useState()
     const [contractSum, setContractSum] = React.useState()
-
+    
     React.useEffect(()=> {
-        axiosInstance.get("/projects").then(({data}) => {
-            setProjects(parseProjectData(data.data))
-            const {yearTotalProjects, yearContractSum} = extractYearData(projects)
-            setTotalProjects(yearTotalProjects)
-            setContractSum(yearContractSum)
-        }).catch((err) => err.response)
-    }, [])
+        const {yearTotalProjects, yearContractSum} = extractYearData(projects)
+        setTotalProjects(yearTotalProjects)
+        setContractSum(yearContractSum)
+    }, [projects])
+    
+    // React.useEffect(()=> {
+    //     axiosInstance.get("/projects").then(({data}) => {
+    //         const formattedPeojects = parseProjectData(data.data)
+    //         setProjects(formattedPeojects)
+    //         const {yearTotalProjects, yearContractSum} = extractYearData(formattedPeojects)
+    //         setTotalProjects(yearTotalProjects)
+    //         setContractSum(yearContractSum)
+    //     }).catch((err) => err.response)
+    //     const formattedPeojects = parseProjectData(projectsData.data)
+    //     setProjects(formattedPeojects)
+    //     const {yearTotalProjects, yearContractSum} = extractYearData(formattedPeojects)
+    //     setTotalProjects(yearTotalProjects)
+    //     setContractSum(yearContractSum)
+    // }, [])
     
 
     const filterHandler = (options) => {
@@ -28,12 +43,6 @@ function Visualization() {
                 const {yearTotalProjects, yearContractSum} = extractYearData(projects)
                 setTotalProjects(yearTotalProjects)
                 setContractSum(yearContractSum)
-                setOptions(options)
-                break;
-            case "sector":
-                const {sectorTotalProjects, sectorContractSum} = extractSectorData(projects)
-                setTotalProjects(sectorTotalProjects)
-                setContractSum(sectorContractSum)
                 setOptions(options)
                 break;
             case "lga":
@@ -53,10 +62,10 @@ function Visualization() {
         }
     }
     return (
-        <Container className="mt-5">
+        <Container className="">
             <VisualizationForm optionsHandler={filterHandler}/>
             <Row className="mt-5 d-lg-flex justify-content-between">
-                <Col lg={6}>
+                <Col lg={6} className="mb-4 mb-lg-0">
                     {options?.chartType === "bar" ? <BarChartWidget title="Number of projects by Procurement method" {...totalProjects}/>: null}
                     {options?.chartType === "line" ? <LineChartWidget title="Number of projects by Procurement method" {...totalProjects}/>: null}
                     {options?.chartType === "area" ? <AreaChartWidget {...totalProjects}/>: null}

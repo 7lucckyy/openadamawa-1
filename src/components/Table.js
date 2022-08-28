@@ -12,35 +12,36 @@ const TableComponent = ({ queries, projects}) => {
         setSearchText(event.target.value)
         setFilteredProjects(projects.filter(project => project.title.toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase())))
     }
+
     const filterHandler = () => {
-        if (queries.length === 0) return projects
+        // if (queries.length === 0) return projects
         
-        return projects.filter(project => {
-            return Object.keys(queries).every(accessor => {
-            const value = project[accessor]
-            const searchValue = queries[accessor]
+        // return projects.filter(project => {
+        //     return Object.keys(queries).every(accessor => {
+        //     const value = project[accessor]
+        //     const searchValue = queries[accessor]
 
-            if (searchValue.length === 0) return true //If no option is selected return the project w/o filtering
+        //     if (searchValue.length === 0) return true //If no option is selected return the project w/o filtering
 
-            if (typeof value === 'string') {
-                return value.toLowerCase().includes(searchValue.toLowerCase())
-            }
+        //     if (typeof value === 'string') {
+        //         return value.toLowerCase().includes(searchValue.toLowerCase())
+        //     }
 
-            if (typeof value === 'boolean') {
-                return (searchValue === 'true' && value) || (searchValue === 'false' && !value)
-            }
+        //     if (typeof value === 'boolean') {
+        //         return (searchValue === 'true' && value) || (searchValue === 'false' && !value)
+        //     }
 
-            if (typeof value === 'number') {
-                return value == searchValue
-            }
+        //     if (typeof value === 'number') {
+        //         return value === searchValue
+        //     }
 
-            return false
-            })
-        })
-        // if(Object.values(queries).length === 0) return projects
-        // return projects.filter(project => 
-        //     ((project.lga.includes(queries.lga)) && (project.mda.includes(queries.mda)) && 
-        //     (project.contractor.includes(queries.contractor))) || (project.year === +queries.year))
+        //     return false
+        //     })
+        // })
+        if(Object.values(queries).length === 0) return projects
+        return projects.filter(project => ((project.lga.includes(queries.lga)) ||
+        (project.mda.includes(queries.mda))) || (project.contractor.includes(queries.contractor)) ||
+        (project.year === +queries.year))
     }
 
     React.useEffect(()=> {
@@ -55,7 +56,7 @@ const TableComponent = ({ queries, projects}) => {
     const calculatedProjects = filteredProjects?.slice((activePage - 1) * projectsPerPage, activePage * projectsPerPage)
 
     return (
-        <Row className="mt-5 border p-5">
+        <Row className="mt-5 border p-lg-5">
             <Row>
                 <Col xs={12} className="mx-auto">
                     <h3 className='border-2 border-bottom text-center'>Table Data</h3>
@@ -82,7 +83,7 @@ const TableComponent = ({ queries, projects}) => {
                     <th>Year</th>
                     <th>Contractor</th>
                     <th>Budgeted Amount</th>
-                    <th>Contrcated Amount</th>
+                    <th>Contract Amount</th>
                     <th>MDA</th>
                     </tr>
                 </thead>

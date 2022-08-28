@@ -74,27 +74,6 @@ export function extractYearData(projects) {
             yearContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
 }
 
-export function extractSectorData(projects) {
-    const results = {}
-    const resultsSum = {}
-    projects.forEach(project => {
-        if (!results[project.lga]) {
-            results[project.lga] = 1
-        } else {
-            results[project.lga] += 1
-        }
-    })
-    projects.forEach(project => {
-        if (!resultsSum[project.lga]) {
-            resultsSum[project.lga] = parseInt(project.contractAmount, 10)
-        } else {
-            resultsSum[project.lga] += parseInt(project.contractAmount, 10)
-        }
-    })
-    return {sectorTotalProjects: {series: Object.values(results), labels: Object.keys(results)},
-            sectorContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
-}
-
 export function extractLGAData(projects) {
     const results = {}
     const resultsSum = {}

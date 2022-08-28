@@ -11,19 +11,19 @@ function Home() {
           </div>
         </Col>
       <Row className="mt-5 px-5">
-        <Col>
+        <Col xs={12} lg={6}>
           <p className="fs-2 fw-bold">Process of Data Collection</p>
           <p className="fs-4">Budeshi gives users access to procurement data such as budget amounts, contract amounts, contractor details, project location, e.t.c from over 90 Ministries, Departments and Agencies (MDAs) in Nigeria at the federal level. Information uploaded on the portal is obtained through freedom of information requests sent to these MDAs in line with the Freedom of Information Act (2011). We make over 300 FOI requests yearly and update the platform with information received from these requests.</p>
         </Col>
-        <Col className="d-flex justify-content-center align-items-center">
+        <Col xs={12} lg={6} className="d-flex justify-content-center align-items-center">
           <img src={process.env.PUBLIC_URL+"logo192.png"} className="w-50" alt="Openadamwa 1"/>
         </Col>
       </Row>
-      <Row className="mt-5 px-5">
-        <Col className="d-flex justify-content-center align-items-center">
+      <Row className="d-flex mt-5 px-5">
+        <Col xs={12} lg={6} className="order-last order-lg-first d-flex justify-content-center align-items-center">
           <img src={process.env.PUBLIC_URL+"logo192.png"} className="w-50" alt="Openadamwa 1"/>
         </Col>
-        <Col>
+        <Col xs={12} lg={6} className="order-first order-lg-last">
           <p className="fs-2 fw-bold">Data Processing</p>
           <p className="fs-4">Budeshi gives users access to procurement data such as budget amounts, contract amounts, contractor details, project location, e.t.c from over 90 Ministries, Departments and Agencies (MDAs) in Nigeria at the federal level. Information uploaded on the portal is obtained through freedom of information requests sent to these MDAs in line with the Freedom of Information Act (2011). We make over 300 FOI requests yearly and update the platform with information received from these requests.</p>
         </Col>

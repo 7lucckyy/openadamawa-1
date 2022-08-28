@@ -2,7 +2,8 @@ import React from 'react'
 import { Card, Row, Col } from "react-bootstrap";
 
 import { BarChart, CircleChart, LineChart, AreaChart } from './Charts';
-import ChartMenuDropdown from './ChartMenuDropdown';
+// import Dropdown from './ChartMenuDropdown';
+import Dropdown from './Dropdown';
 
 export const BarChartWidget = (props) => {
   const { title, labels = [], series=[] } = props;
@@ -14,7 +15,7 @@ export const BarChartWidget = (props) => {
           <p className="fw-normal text-gray mb-2">{title}</p>
         </div>
         <div>
-          <ChartMenuDropdown/>
+          <Dropdown/>
         </div>
       </Card.Header>
       <Card.Body className="p-2">
@@ -36,7 +37,7 @@ export const PieChartWidget = (props) => {
           <p className="fw-normal text-gray mb-2">{title}</p>
         </div>
         <div>
-          <ChartMenuDropdown/>
+          <Dropdown/>
         </div>
       </Card.Header>
       <Card.Body>
@@ -73,7 +74,7 @@ export const LineChartWidget = (props) => {
           <h3>{value}</h3>
         </div>
         <div>
-          <ChartMenuDropdown/>
+          <Dropdown/>
         </div>
       </Card.Header>
       <Card.Body className="p-2">
@@ -96,7 +97,7 @@ export const AreaChartWidget = (props) => {
           <h3>{value}</h3>
         </div>
         <div>
-          <ChartMenuDropdown/>
+          <Dropdown/>
         </div>
       </Card.Header>
       <Card.Body className="p-2">

@@ -46,9 +46,19 @@ export const LineChart = (props) => {
     scales: {
       y: { 
         // min: 0, max: 100,
-        grid: {display: true}
+        grid: {display: true},
+        ticks: {
+          callback: (value, index, ticks) => value
+        }
       },
-      x: { grid: {display: true}}
+      x: { grid: {display: true},
+      ticks: {
+        callback: (value, index, ticks) => {
+          const returnValue = value.length > 10 ? value.substring(0, 10) + "..." : value
+          console.log(value, index, ticks);
+          return returnValue
+        }
+      }}
     },
     // animations: {
     //   tension: {

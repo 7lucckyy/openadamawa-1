@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
+import { } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
 
@@ -10,8 +10,10 @@ function Template() {
   return (
     <main className=''>
         <Header/>
-        <Outlet/>
-        <Footer/>
+        <div className="bg-gray">
+          <Outlet/>
+          <Footer/>
+        </div>
       </main>
   )
 }
