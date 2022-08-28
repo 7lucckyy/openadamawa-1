@@ -1,11 +1,11 @@
 import React from 'react'
 import {Container, Navbar, Nav} from 'react-bootstrap';
 import { useNavigate, useLocation } from "react-router-dom"
+import { FaUser } from "react-icons/fa"
 
 const Header = () => {
   const navigate = useNavigate()
-  const {pathname} = useLocation()
-  
+  const { pathname } = useLocation()  
   return (
     <header>
       <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
@@ -13,11 +13,12 @@ const Header = () => {
         <Navbar.Brand href="#home">Open Adamawa</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav activeKey={pathname} className="ms-auto">
+          <Nav activeKey="" className="ms-auto">
             <Nav.Link onClick={()=>navigate("/")}>Home</Nav.Link>
-            <Nav.Link href="/projects">Projects</Nav.Link>
+            <Nav.Link onClick={()=>navigate("/projects")}>Projects</Nav.Link>
             <Nav.Link onClick={()=>navigate("/visualization")}>Visualization</Nav.Link>
-            <Nav.Link href="/login"><i className="fa fa-user mr-1" aria-hidden="true"></i>Login</Nav.Link>
+            <Nav.Link onClick={()=>navigate("/community-dev-plan")}>Community Dev. Plan</Nav.Link>
+            <Nav.Link onClick={()=>navigate("/contact")}>Contact</Nav.Link>
             
           </Nav>
         </Navbar.Collapse>

@@ -13,10 +13,34 @@ const TableComponent = ({ queries, projects}) => {
         setFilteredProjects(projects.filter(project => project.title.toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase())))
     }
     const filterHandler = () => {
-        if(Object.values(queries).length === 0) return projects
-        return projects.filter(project => 
-            ((project.lga.includes(queries.lga)) && (project.mda.includes(queries.mda)) && 
-            (project.contractor.includes(queries.contractor))) || (project.year === +queries.year))
+        if (queries.length === 0) return projects
+        
+        return projects.filter(project => {
+            return Object.keys(queries).every(accessor => {
+            const value = project[accessor]
+            const searchValue = queries[accessor]
+
+            if (searchValue.length === 0) return true //If no option is selected return the project w/o filtering
+
+            if (typeof value === 'string') {
+                return value.toLowerCase().includes(searchValue.toLowerCase())
+            }
+
+            if (typeof value === 'boolean') {
+                return (searchValue === 'true' && value) || (searchValue === 'false' && !value)
+            }
+
+            if (typeof value === 'number') {
+                return value == searchValue
+            }
+
+            return false
+            })
+        })
+        // if(Object.values(queries).length === 0) return projects
+        // return projects.filter(project => 
+        //     ((project.lga.includes(queries.lga)) && (project.mda.includes(queries.mda)) && 
+        //     (project.contractor.includes(queries.contractor))) || (project.year === +queries.year))
     }
 
     React.useEffect(()=> {
@@ -25,7 +49,7 @@ const TableComponent = ({ queries, projects}) => {
         
     
     const [activePage, setActivePage] = React.useState(1)
-    const projectsPerPage = 2
+    const projectsPerPage = 10
     const count = filteredProjects?.length
     const totalPages = Math.ceil(count / projectsPerPage)
     const calculatedProjects = filteredProjects?.slice((activePage - 1) * projectsPerPage, activePage * projectsPerPage)
@@ -33,20 +57,20 @@ const TableComponent = ({ queries, projects}) => {
     return (
         <Row className="mt-5 border p-5">
             <Row>
-                <Col xs={12} className="w-25 mx-auto">
+                <Col xs={12} className="mx-auto">
                     <h3 className='border-2 border-bottom text-center'>Table Data</h3>
                 </Col>
             </Row>
-            <Row className="d-flex justify-content-between my-3">
+            <Row className="d-block d-lg-flex justify-content-between my-3">
                 <Col xs={12} lg={6} className="mb-3">
-                    <ButtonGroup className="shadow">
+                    <ButtonGroup className="shadow w-100">
                         <Button variant="info">Download CSV</Button>
                         <Button variant="info">PDF</Button>
                     </ButtonGroup>
                 </Col>
                 <Col xs={12} lg={4}>
                     <Form.Group className="" controlId="formBasicMDA">
-                            <Form.Control placeholder="Search..." name="search" type="search" value={searchText} onChange={searchHandler}/>
+                            <Form.Control className="rounded" placeholder="Search..." name="search" type="search" value={searchText} onChange={searchHandler}/>
                     </Form.Group>
                 </Col>
             </Row>

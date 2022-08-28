@@ -31,7 +31,7 @@ const Summary = ({ totalNumberOfProjects, totalContract, highestContract, lowest
                         <div className='p-4 text-white d-flex justify-content-between align-items-center'>
                             <FaBriefcase size={"60"} className='text-danger text-white'/>
                             <h3>
-                                <span className='me-2 text-decoration-line-through fw-bolder'>N</span>
+                                <span className='me-1 text-decoration-line-through fw-bolder'>N</span>
                                 <CountUpAnimation duration={1000}>{totalContract}</CountUpAnimation>
                             </h3>
                         </div>
@@ -47,7 +47,7 @@ const Summary = ({ totalNumberOfProjects, totalContract, highestContract, lowest
                         <div className='p-4 text-white d-flex justify-content-between align-items-center'>
                             <FaBriefcase size={"60"} className='text-danger text-white'/>
                             <h3>
-                                <span className='me-2 text-decoration-line-through fw-bolder'>N</span>
+                                <span className='me-1 text-decoration-line-through fw-bolder'>N</span>
                                 <CountUpAnimation duration={1000}>{highestContract}</CountUpAnimation>
                             </h3>
                         </div>
@@ -63,7 +63,7 @@ const Summary = ({ totalNumberOfProjects, totalContract, highestContract, lowest
                             <div className='p-4 text-white d-flex justify-content-between align-items-center'>
                                 <FaBriefcase size={"60"} className='text-danger text-white'/>
                                 <h3>
-                                    <span className='me-2 text-decoration-line-through fw-bolder'>N</span>
+                                    <span className='me-1 text-decoration-line-through fw-bolder'>N</span>
                                     <CountUpAnimation duration={1000}>{lowestContract}</CountUpAnimation>
                                 </h3>
                             </div>
@@ -78,53 +78,3 @@ const Summary = ({ totalNumberOfProjects, totalContract, highestContract, lowest
 }
 
 export default Summary
-
-
-{/* <Container>
-            <Row>
-                <Col md={6}>
-                   
-                </Col>
-                <Col>
-                    <Col>
-                        <div className='text-center'>
-                            <h3 className='bolder'>Summary</h3>
-                            <hr></hr>
-                        </div>
-                    </Col>
-                    <Row className="d-flex justify-content-betwen">
-                        <Col lg="5"className="bg-primary">
-                            <div className='py-3 mt-2 mb-2 p-4'>
-                                <FaCog size={"60"} className='text-danger'/><span className='ml-2'>N</span>
-                            </div>
-                            <p>Hell</p>
-                        </Col>
-                        <Col lg="5" className="bg-danger">
-                            <div className='py-3 mt-2 mb-2 p-4'>
-                            <FaBriefcase size={"60"} className='text-warning'/><span className='ml-2'>N</span>
-                            </div>
-                        </Col>
-                        
-                    </Row>
-                    <Col>
-                        <div className='border border-1'>
-                        <Row>
-                            <Col>
-                                <div className='py-3 mt-2 mb-2 p-4'>
-                                    <FaBriefcase size={"60"} className='text-secondary'/><span className='ml-2'>N</span>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className='py-3 mt-2 mb-2 p-4'>
-                                    <FaBriefcase size={"60"} className=''/><span className='ml-2'>N</span>
-                                </div>
-                            </Col>
-                            
-                        </Row>
-                         </div>
-                    
-                    </Col>
-                </Col>
-            </Row>
-           
-        </Container>  */}

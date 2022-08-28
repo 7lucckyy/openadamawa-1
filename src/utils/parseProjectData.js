@@ -3,7 +3,7 @@ export default function parseProjectData(projects) {
         return {id: project.id, budgetAmount: project.project_budget_amount, contractAmount: project.project_contract_amount,
             lga: project.project_lga.lga_name, mda: project.project_mda.mda_name, title: project.project_title, year: project.project_year,
         contractor: project.project_contractor.contractor_name}
-        });
+    });
 }
 
 export function parseLGAName(lgas) {
@@ -23,7 +23,6 @@ export function parseContractorName(contractors) {
         return {id: contractor.id, name: contractor.contractor_name}
     })
 }
-
 
 export function parseTotalContractSum(projects) {
     let sum = 0;
@@ -52,4 +51,89 @@ export function currencyFormat(number) {
   );
   
   return formatter.format(number); /* $2,500.00 */
+}
+
+export function extractYearData(projects) {
+    const results = {}
+    const resultsSum = {}
+    projects.forEach(project => {
+        if (!results[project.year]) {
+            results[project.year] = 1
+        } else {
+            results[project.year] += 1
+        }
+    })
+    projects.forEach(project => {
+        if (!resultsSum[project.year]) {
+            resultsSum[project.year] = parseInt(project.contractAmount, 10)
+        } else {
+            resultsSum[project.year] += parseInt(project.contractAmount, 10)
+        }
+    })
+    return {yearTotalProjects: {series: Object.values(results), labels: Object.keys(results)},
+            yearContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
+}
+
+export function extractSectorData(projects) {
+    const results = {}
+    const resultsSum = {}
+    projects.forEach(project => {
+        if (!results[project.lga]) {
+            results[project.lga] = 1
+        } else {
+            results[project.lga] += 1
+        }
+    })
+    projects.forEach(project => {
+        if (!resultsSum[project.lga]) {
+            resultsSum[project.lga] = parseInt(project.contractAmount, 10)
+        } else {
+            resultsSum[project.lga] += parseInt(project.contractAmount, 10)
+        }
+    })
+    return {sectorTotalProjects: {series: Object.values(results), labels: Object.keys(results)},
+            sectorContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
+}
+
+export function extractLGAData(projects) {
+    const results = {}
+    const resultsSum = {}
+    projects.forEach(project => {
+        if (!results[project.lga]) {
+            results[project.lga] = 1
+        } else {
+            results[project.lga] += 1
+        }
+    });
+    projects.forEach(project => {
+        if (!resultsSum[project.lga]) {
+            resultsSum[project.lga] = parseInt(project.contractAmount, 10)
+        } else {
+            resultsSum[project.lga] += parseInt(project.contractAmount, 10)
+        }
+    })
+    return {lgaTotalProjects: {series: Object.values(results), labels: Object.keys(results)},
+            lgaContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
+}
+
+export function extractMDAData(projects) {
+    const results = {}
+    const resultsSum = {}
+    projects.forEach(project => {
+        if (!results[project.mda]) {
+            results[project.mda] = 1
+        } else {
+            results[project.mda] += 1
+        }
+    })
+    projects.forEach(project => {
+        if (!resultsSum[project.mda]) {
+            resultsSum[project.mda] = parseInt(project.contractAmount, 10)
+        } else {
+            resultsSum[project.mda] += parseInt(project.contractAmount, 10)
+        }
+    })
+    return {mdaTotalProjects: {series: Object.values(results), labels: Object.keys(results)},
+            mdaContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
+
 }
