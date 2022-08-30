@@ -13,6 +13,7 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav activeKey="" className="ms-auto">
             <Nav.Link onClick={()=>navigate("/")}>Home</Nav.Link>
+            <Nav.Link onClick={()=>navigate("/about")}>About</Nav.Link>
             <Nav.Link onClick={()=>navigate("/projects")}>Projects</Nav.Link>
             <Nav.Link onClick={()=>navigate("/visualization")}>Visualization</Nav.Link>
             <Nav.Link onClick={()=>navigate("/community-dev-plan")}>Community Dev. Plan</Nav.Link>

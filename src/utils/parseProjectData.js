@@ -53,6 +53,25 @@ export function currencyFormat(number) {
   return formatter.format(number); /* $2,500.00 */
 }
 
+export function formatDigits(number) {
+    const formatter = new Intl.NumberFormat('en-US', {
+        notation: 'compact',
+        compactDisplay: 'short'
+      })
+    return formatter.format(number)
+}
+
+export function parseProjectParameterContractSum(parameter, value, projects) {
+    let result = 0
+    projects.forEach(project => {
+        if (parameter==='year') {
+            value = +value
+        }
+        if (project[parameter] === value) return result += +project["contractAmount"]
+    })
+    return result
+}
+
 export function extractYearData(projects) {
     const results = {}
     const resultsSum = {}

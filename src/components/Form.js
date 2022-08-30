@@ -1,13 +1,11 @@
 import React from 'react'
 import {Container, Col, Row, Form} from 'react-bootstrap'
 
-import { parseLGAName, parseMDAName, parseContractorName } from '../utils/parseProjectData'
-import axiosInstance from '../utils/axiosInstance'
+import { ProjectsContext } from '../_contexts/ProjectsContext'
+
 
 const FormContainer = ({setQuery}) => {
-  const [mdas, setMDAs] = React.useState()
-  const [lgas, setLGAs] = React.useState()
-  const [contractors, setContractors] = React.useState()
+  const { mdas, lgas, contractors } = React.useContext(ProjectsContext)
   const [searchParams, setSearchParams] = React.useState({})
 
   const handleChange = event => {
@@ -17,11 +15,7 @@ const FormContainer = ({setQuery}) => {
     setQuery({...searchParams, [name]: value})
   }
 
-  React.useEffect(()=> {
-      axiosInstance.get("/mdas").then(({data}) => setMDAs(parseMDAName(data.data)))
-      axiosInstance.get("/lgas").then(({data}) => setLGAs(parseLGAName(data.data)))
-      axiosInstance.get("/contractors").then(({data}) => setContractors(parseContractorName(data.data)))
-    },[])
+  
   
   return (
     <>

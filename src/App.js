@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Projects from "./pages/Projects"
 import Visualization from "./pages/Visualization"
 import Template from './components/Template';
+import About from './pages/About';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import Community from './pages/Community';
 import ProjectsProvider, { ProjectsContext } from './_contexts/ProjectsContext';
 import './index.css';
 
@@ -16,9 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Template/>}>
             <Route index element={<Home/>}/>
+            <Route path="about" element={<About/>}/>
             <Route path="projects" element={<Projects/>}/>
             <Route path="visualization" element={<Visualization/>}/>
-            <Route path="community-dev-plan" element={<p>Community Dev. Plan</p>}/>
+            <Route path="community-dev-plan" element={<Community/>}/>
             <Route path="contact" element={<Contact/>}/>
           </Route>
         </Routes>

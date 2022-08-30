@@ -1,12 +1,9 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, {useEffect, useState} from 'react'
 import { MdMenu } from 'react-icons/md';
-import { useNavigate } from "react-router-dom";
-
 
 
 export default function Dropdown() {
-    const navigate = useNavigate();
     const [dropdown, setDropdown] = useState(false);
 
 	let ref = React.useRef();
@@ -27,11 +24,15 @@ export default function Dropdown() {
 	}, [dropdown]);
 
 	const onMouseEnter = () => {
-		window.innerWidth > 960 && setDropdown(true);
+		setTimeout(() => {
+			window.innerWidth > 960 && setDropdown(true);
+		}, 1000);
 	};
 
 	const onMouseLeave = () => {
-		window.innerWidth > 960 && setDropdown(false);
+		setTimeout(() => {
+			window.innerWidth > 960 && setDropdown(false);
+		}, 1000);
 	};
     return(
         <>
@@ -39,7 +40,7 @@ export default function Dropdown() {
 
             {/* <!-- Dropdown menu --> */}
             <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} id="dropdownInformation" style={{'z-index': '10'}}
-                className={`position-absolute mt-48 ${dropdown ? "" : "d-none"} rounded shadow text-nowrap`}>
+                className={`position-absolute ${dropdown ? "" : "d-none"} shadow text-nowrap`}>
                 <div className="px-4 py-1 bg-white">
                     <p>View in full screen</p>
                     <p>Print Chart</p>

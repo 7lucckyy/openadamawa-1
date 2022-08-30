@@ -56,17 +56,17 @@ const TableComponent = ({ queries, projects}) => {
     const calculatedProjects = filteredProjects?.slice((activePage - 1) * projectsPerPage, activePage * projectsPerPage)
 
     return (
-        <Row className="mt-5 border p-lg-5">
+        <Row className="mt-5 border py-3 py-lg-5 px-lg-2">
             <Row>
                 <Col xs={12} className="mx-auto">
                     <h3 className='border-2 border-bottom text-center'>Table Data</h3>
                 </Col>
             </Row>
             <Row className="d-block d-lg-flex justify-content-between my-3">
-                <Col xs={12} lg={6} className="mb-3">
-                    <ButtonGroup className="shadow w-100">
-                        <Button variant="info">Download CSV</Button>
-                        <Button variant="info">PDF</Button>
+                <Col xs={12} lg={4} className="mb-3">
+                    <ButtonGroup className="w-100">
+                        <Button variant="info" className="shadow">Download CSV</Button>
+                        <Button variant="info" className="ms-2 ms-md-4 shadow">PDF</Button>
                     </ButtonGroup>
                 </Col>
                 <Col xs={12} lg={4}>
@@ -82,8 +82,8 @@ const TableComponent = ({ queries, projects}) => {
                     <th>Location</th>
                     <th>Year</th>
                     <th>Contractor</th>
-                    <th>Budgeted Amount</th>
-                    <th>Contract Amount</th>
+                    <th>Budgeted Amount(NGN)</th>
+                    <th>Contract Amount(NGN)</th>
                     <th>MDA</th>
                     </tr>
                 </thead>
