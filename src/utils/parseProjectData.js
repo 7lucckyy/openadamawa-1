@@ -53,6 +53,25 @@ export function currencyFormat(number) {
   return formatter.format(number); /* $2,500.00 */
 }
 
+export function formatDigits(number) {
+    const formatter = new Intl.NumberFormat('en-US', {
+        notation: 'compact',
+        compactDisplay: 'short'
+      })
+    return formatter.format(number)
+}
+
+export function parseProjectParameterContractSum(parameter, value, projects) {
+    let result = 0
+    projects.forEach(project => {
+        if (parameter==='year') {
+            value = +value
+        }
+        if (project[parameter] === value) return result += +project["contractAmount"]
+    })
+    return result
+}
+
 export function extractYearData(projects) {
     const results = {}
     const resultsSum = {}
@@ -72,27 +91,6 @@ export function extractYearData(projects) {
     })
     return {yearTotalProjects: {series: Object.values(results), labels: Object.keys(results)},
             yearContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
-}
-
-export function extractSectorData(projects) {
-    const results = {}
-    const resultsSum = {}
-    projects.forEach(project => {
-        if (!results[project.lga]) {
-            results[project.lga] = 1
-        } else {
-            results[project.lga] += 1
-        }
-    })
-    projects.forEach(project => {
-        if (!resultsSum[project.lga]) {
-            resultsSum[project.lga] = parseInt(project.contractAmount, 10)
-        } else {
-            resultsSum[project.lga] += parseInt(project.contractAmount, 10)
-        }
-    })
-    return {sectorTotalProjects: {series: Object.values(results), labels: Object.keys(results)},
-            sectorContractSum: {series: Object.values(resultsSum), labels: Object.keys(resultsSum)}}
 }
 
 export function extractLGAData(projects) {
